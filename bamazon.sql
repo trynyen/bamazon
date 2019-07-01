@@ -15,7 +15,7 @@ PRIMARY KEY(id)
 
 -- Add mock products
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-VALUES ("B072L38SGT", "Dehydrated Water 16oz Can","Groceries", 10.99, 10);
+VALUES ("B072L38SGT", "Dehydrated Water","Groceries", 10.99, 10);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
 VALUES ("B01D961QI6", "Earthworm Jerky","Groceries", 13.99, 2);
