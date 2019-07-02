@@ -2,6 +2,7 @@ require("dotenv").config();
 // require("console.table");
 var inquirer = require("inquirer");
 var mysql = require("mysql");
+var chalk = require("chalk");
 
 //Connecting mysql database
 var connection = mysql.createConnection({
@@ -19,7 +20,7 @@ function customer() {
         if (err) throw err;
         console.table(res);
 
-        //Displaying 2 questions
+        //Displaying 2 prompt questions
         inquirer.prompt([
             {
                 type: "input",
@@ -34,38 +35,50 @@ function customer() {
         ]).then(function (check) {
             //Check quantity of product
             for (var i = 0; i < res.length; i++) {
+                //If prompt item = item id from product table
                 if (check.item == res[i].id) {
+                    //If current stock quantity >= prompt quantity
                     if (res[i].stock_quantity >= check.quantity) {
-                        console.log(check.item);
-                        console.log("Fortunately, we have enough stock")
+
+                        //Total price = price of item multilply by prompt quantity
                         var totalPrice = res[i].price * check.quantity;
-                        console.log("Your total is: $" + totalPrice);
 
                         //Update quantity
                         connection.query("UPDATE products SET ? WHERE ?",
                             [
+                                //Updated stock quantity = current stock quantity - prompt quantity
                                 {
                                     stock_quantity: res[i].stock_quantity - check.quantity
                                 },
+
+                                //Do calculation with the prompt item only
                                 {
                                     id: check.item
                                 }
                             ],
 
-                            //Show updated table
+                            //Show table qith updated quantity
                             function (error, response) {
                                 if (error) throw error;
-                                console.log("Stock quantity has been updated");
+                                console.log(chalk.magentaBright("Stock quantity has been updated"));
                                 connection.query("SELECT * FROM products", function (error, response) {
                                     if (error) throw error;
                                     console.table(response);
+
+                                    //Show total price
+                                    console.log(chalk.cyanBright("Your total is: ") + "$" + totalPrice.toFixed(2));
                                 }),
-                                    connection.commit();
+
+                                //Commit new data to update mysql database
+                                connection.commit();
+                                //End connection
                                 connection.end();
                             })
                     }
+
+                    //If current stock quantity is less than prompt quantity, log Insufficient quantity
                     else {
-                        console.log("Insufficient quantity!");
+                        console.log(chalk.magentaBright("Insufficient quantity!"));
                         connection.end();
                     }
                 }
@@ -74,19 +87,9 @@ function customer() {
     });
 }
 
+//Connect to database
 connection.connect(function (err) {
     if (err) throw err;
     console.log("Connected as ID: " + connection.threadId);
     customer();
 })
-
-// loadProducts()
-// promptCustomerForItem(res)
-// checkInventory()
-// loadProducts()
-// promptCustomerForQuantity(product)
-// checkIfShouldExit()
-// makePurchase(product, quantity)
-    // UPDATE products SET .... 
-// loadProducts()
-
