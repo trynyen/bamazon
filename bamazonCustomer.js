@@ -1,4 +1,5 @@
 require("dotenv").config();
+// require("console.table");
 var inquirer = require("inquirer");
 var mysql = require("mysql");
 
@@ -12,7 +13,7 @@ var connection = mysql.createConnection({
 });
 
 
-function afterConnection() {
+function customer() {
     //Get data and display on terminal
     connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
@@ -35,28 +36,54 @@ function afterConnection() {
             for (var i = 0; i < res.length; i++) {
                 if (check.item == res[i].id) {
                     if (res[i].stock_quantity >= check.quantity) {
+                        console.log(check.item);
                         console.log("Fortunately, we have enough stock")
-                        connection.query("DELETE FROM products WHERE?",
+
+                        //Update quantity
+                        connection.query("UPDATE products SET ? WHERE ?",
+                        [
                             {
-                                id: res[i]
+                                stock_quantity: res[i].stock_quantity - check.quantity
                             },
+                            {
+                                id: check.item
+                            }
+                        ],
+                        
+                            //Show updated table
                             function (error, response) {
                                 if (error) throw error;
-                                console.log(response.affectedRows + " products deleted!");
+                                console.log(response.affectedRows + " products updated!");
+                                connection.query("SELECT * FROM products", function (error, response) {
+                                    if (error) throw error;
+                                    console.table(response);
+                                }),
+                                connection.end();
                             })
                     }
                     else {
-                        console.log("Insufficient quantity!")
+                        console.log("Insufficient quantity!");
+                        connection.end();
                     }
                 }
             }
         })
-        connection.end();
     });
 }
 
 connection.connect(function (err) {
     if (err) throw err;
     console.log("Connected as ID: " + connection.threadId);
-    afterConnection();
+    customer();
 })
+
+// loadProducts()
+// promptCustomerForItem(res)
+// checkInventory()
+// loadProducts()
+// promptCustomerForQuantity(product)
+// checkIfShouldExit()
+// makePurchase(product, quantity)
+    // UPDATE products SET .... 
+// loadProducts()
+
