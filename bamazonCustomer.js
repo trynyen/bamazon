@@ -38,27 +38,29 @@ function customer() {
                     if (res[i].stock_quantity >= check.quantity) {
                         console.log(check.item);
                         console.log("Fortunately, we have enough stock")
+                        var totalPrice = res[i].price * check.quantity;
+                        console.log("Your total is: $" + totalPrice);
 
                         //Update quantity
                         connection.query("UPDATE products SET ? WHERE ?",
-                        [
-                            {
-                                stock_quantity: res[i].stock_quantity - check.quantity
-                            },
-                            {
-                                id: check.item
-                            }
-                        ],
-                        
+                            [
+                                {
+                                    stock_quantity: res[i].stock_quantity - check.quantity
+                                },
+                                {
+                                    id: check.item
+                                }
+                            ],
+
                             //Show updated table
                             function (error, response) {
                                 if (error) throw error;
-                                console.log(response.affectedRows + " products updated!");
+                                console.log("Stock quantity has been updated");
                                 connection.query("SELECT * FROM products", function (error, response) {
                                     if (error) throw error;
                                     console.table(response);
                                 }),
-                                connection.commit();
+                                    connection.commit();
                                 connection.end();
                             })
                     }
