@@ -18,30 +18,30 @@ INSERT INTO products (item_id, product_name, department_name, price, stock_quant
 VALUES ("B072L38SGT", "Dehydrated Water","Groceries", 10.99, 10);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-VALUES ("B01D961QI6", "Earthworm Jerky","Groceries", 13.99, 2);
+VALUES ("B01D961QI6", "Earthworm Jerky","Groceries", 13.99, 10);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-VALUES ("B00OAC9BUO", "Five Finger Hands Finger Puppets","Toys & Games", 5.98, 4);
+VALUES ("B00OAC9BUO", "Five Finger Hands Finger Puppets","Toys & Games", 5.98, 10);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-VALUES ("B015HM637E", "Extra Manly Bacon Scented Mustache","Toys & Games", 7.12, 4);
+VALUES ("B015HM637E", "Extra Manly Bacon Scented Mustache","Toys & Games", 7.12, 10);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-VALUES ("B00533KOIC", "1500 Live Ladybugs","Garden & Outdoors", 6.50, 1);
+VALUES ("B00533KOIC", "1500 Live Ladybugs","Garden & Outdoors", 6.50, 10);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-VALUES ("B01C4K7H5E", "Dog Wig Blonde Ponytail","Pet Supplies", 14.30, 6);
+VALUES ("B01C4K7H5E", "Dog Wig Blonde Ponytail","Pet Supplies", 14.30, 10);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-VALUES ("B07RW258FY", "Cat Butt Tissue Dispenser ","Home & Kitchen", 49.99, 1);
+VALUES ("B07RW258FY", "Cat Butt Tissue Dispenser ","Home & Kitchen", 49.99, 10);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-VALUES ("B0046GK1AI", "Boyfriend Pillow","Home & Kitchen", 34.73, 8);
+VALUES ("B0046GK1AI", "Boyfriend Pillow","Home & Kitchen", 34.73, 10);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-VALUES ("B00BC1GCOO", "Mullet Headband","Costumes & Accessories", 10.00, 6);
+VALUES ("B00BC1GCOO", "Mullet Headband","Costumes & Accessories", 10.00, 10);
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity)
-VALUES ("B00QVWZ2P4", "Toe Exerciser","Heath & Household", 49.00, 2);
+VALUES ("B00QVWZ2P4", "Toe Exerciser","Heath & Household", 49.00, 10);
 
 SELECT * FROM products;
