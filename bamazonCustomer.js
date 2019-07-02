@@ -58,6 +58,7 @@ function customer() {
                                     if (error) throw error;
                                     console.table(response);
                                 }),
+                                connection.commit();
                                 connection.end();
                             })
                     }
